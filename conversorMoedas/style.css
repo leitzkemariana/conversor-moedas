@@ -1,0 +1,61 @@
+body {
+  background-color: #a65b84;
+}
+
+h1 {
+  font-size: 30px;
+  color: #f9d4fa;
+  text-align: center;
+}
+
+h2 {
+  color: #f9d4fa;
+}
+
+select {
+  background-color: #f9d4fa;
+  font-size: 14px;
+  padding: 6px;
+}
+
+#valorInicial {
+  color: #a65b84;
+  text-align: right;
+  font-size: 14px;
+  padding: 6px;
+}
+
+#valorFinal {
+  color: #5e1861;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px;
+}
+
+button {
+  background-color: #f9d4fa;
+  color: #a65b84;
+  padding: 10px;
+  border: 0px;
+  align-self: flex-end;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #5e1861;
+  color: #fffcfc;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
