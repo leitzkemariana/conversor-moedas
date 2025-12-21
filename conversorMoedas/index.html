@@ -11,7 +11,13 @@
     <div class="container">
       <div class="campo">
         <h2>Valor</h2>
-        <input type="text" id="valorInicial" placeholder="0.00" />
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          id="valorInicial"
+          placeholder="0.00"
+        />
       </div>
 
       <div class="campo">
@@ -19,7 +25,9 @@
         <select id="moedaInicial">
           <option>Real (BRL)</option>
           <option>Euro (EUR)</option>
-          <option>Dólar (USD)</option>
+          <option>Dólar Americano(USD)</option>
+          <option>Yuan (CNY)</option>
+          <option>Libra Esterlina (GBP)</option>
         </select>
       </div>
 
@@ -35,7 +43,9 @@
         <select id="moedaFinal">
           <option>Real (BRL)</option>
           <option>Euro (EUR)</option>
-          <option>Dólar (USD)</option>
+          <option>Dólar Americano(USD)</option>
+          <option>Yuan (CNY)</option>
+          <option>Libra Esterlina (GBP)</option>
         </select>
       </div>
     </div>
