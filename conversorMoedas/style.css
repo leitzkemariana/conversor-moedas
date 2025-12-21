@@ -1,32 +1,36 @@
 body {
-  background-color: #a65b84;
+  background-color: #bfbdb8;
 }
 
 h1 {
   font-size: 30px;
-  color: #f9d4fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #2a2b2a;
   text-align: center;
 }
 
 h2 {
-  color: #f9d4fa;
+  color: #264016;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 select {
-  background-color: #f9d4fa;
+  background-color: #657958;
+  color: #fffcfc;
   font-size: 14px;
   padding: 6px;
+  cursor: pointer;
 }
 
 #valorInicial {
-  color: #a65b84;
+  color: #6c7336;
   text-align: right;
   font-size: 14px;
   padding: 6px;
 }
 
 #valorFinal {
-  color: #5e1861;
+  color: #264016;
   text-align: right;
   font-size: 14px;
   font-weight: bold;
@@ -34,17 +38,18 @@ select {
 }
 
 button {
-  background-color: #f9d4fa;
-  color: #a65b84;
+  background-color: #264016;
+  color: #fffcfc;
   padding: 10px;
   border: 0px;
   align-self: flex-end;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #5e1861;
+  background-color: #657958;
   color: #fffcfc;
 }
 
