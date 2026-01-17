@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class ConversorController {
 
     @PostMapping("/conversor")
-    public String conversor(@RequestBody ConversorModel conversor) {
+    private String resposta (@RequestBody ConversorModel conversor) {
         Double valorInicial = conversor.getValorInicial();
         String moedaInicial = conversor.getMoedaInicial();
         String moedaFinal = conversor.getMoedaFinal();
@@ -17,45 +17,31 @@ public class ConversorController {
             return "Erro: moedas iguais";
         }
 
-        if (moedaInicial.equals("Real (BRL)")){
-            moedaInicial = "BRL";
-        } else if (moedaInicial.equals("Dólar Americano(USD)")) {
-            moedaInicial = "USD";
-        } else if (moedaInicial.equals("Euro (EUR)")) {
-            moedaInicial = "EUR";
-        } else if (moedaInicial.equals("Yuan (CNY)")) {
-            moedaInicial = "CNY";
-        } else if (moedaInicial.equals("Libra Esterlina (GBP)")){
-            moedaInicial = "GBP";
+        if (valorInicial == null) {
+            valorInicial = 0.0;
         }
 
-        if (moedaFinal.equals("Real (BRL)")){
-            moedaFinal = "BRL";
-        } else if (moedaFinal.equals("Dólar Americano(USD)")) {
-            moedaFinal = "USD";
-        } else if (moedaFinal.equals("Euro (EUR)")) {
-            moedaFinal = "EUR";
-        } else if (moedaFinal.equals("Yuan (CNY)")) {
-            moedaFinal = "CNY";
-        } else if (moedaFinal.equals("Libra Esterlina (GBP)")){
-            moedaFinal = "GBP";
+        moedaInicial = abreviacao(moedaInicial);
+        moedaFinal = abreviacao(moedaFinal);
+
+        double valorFinal = 0.0;
+
+        try{
+            valorFinal = conversao(moedaInicial, moedaFinal, valorInicial);
+        } catch (Exception e){
+            double valorEmDolar = conversao(moedaInicial, "USD", valorInicial);
+            valorFinal = conversao("USD", moedaFinal, valorEmDolar);
         }
 
-        if ((moedaInicial.equals("GBP") || (moedaInicial.equals("CNY"))) && (moedaFinal.equals("CNY") || moedaFinal.equals("GBP"))) {
-            String urlUSD = "https://economia.awesomeapi.com.br/json/last/" + moedaInicial + "-" + "USD";
+        return  String.format("%.2f", valorFinal);
+    }
 
-            RestTemplate restTemplate = new RestTemplate();
-            String libraDolar= restTemplate.getForObject(urlUSD, String.class);
+    private String abreviacao (String moeda){
+        String abr = moeda.substring((moeda.indexOf("(")+1), moeda.indexOf(")"));
+        return abr;
+    }
 
-            JSONObject json = new JSONObject(libraDolar);
-            double taxa = json.getJSONObject(moedaInicial + "USD").getDouble("bid");
-
-            double valorDolar = valorInicial * taxa;
-            valorInicial = valorDolar;
-            moedaInicial = "USD";
-
-        }
-
+    private Double conversao (String moedaInicial, String moedaFinal, Double valorInicial){
         String url = "https://economia.awesomeapi.com.br/json/last/" + moedaInicial + "-" + moedaFinal;
         RestTemplate restTemplate = new RestTemplate();
 
@@ -64,7 +50,6 @@ public class ConversorController {
 
         String chave = moedaInicial + moedaFinal;
         double taxa = json.getJSONObject(chave).getDouble("bid");
-        double valorFinal = valorInicial * taxa;
-        return  String.format("%.2f", valorFinal);
+        return valorInicial * taxa;
     }
 }
